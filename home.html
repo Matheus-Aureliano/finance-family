@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Dashboard - FinanceFamily</title>
+</head>
+<body>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="lancamentos.html">Novo Gasto</a>
+        <a href="extrato.html">Extrato</a>
+        <a href="index.html" onclick="localStorage.removeItem('userEmail')">Sair</a> 
+    </nav>
+    <div class="container">
+        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1000&auto=format&fit=crop" style="width: 100%; height: 140px; object-fit: cover; border-radius: 15px; margin-bottom: 15px;">
+        <h1 id="boasVindas">Olá!</h1>
+        <p class="site-subtitle">FinanceFamily</p>
+
+        <div class="dashboard">
+            <div class="card verde"><small>Saldo Atual</small><p id="saldoCard">R$ 0,00</p></div>
+            <div class="card vermelho"><small>Total Gastos</small><p id="gastoCard">R$ 0,00</p></div>
+        </div>
+        <button onclick="window.location.href='lancamentos.html'">Registar Gasto</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const email = localStorage.getItem('userEmail');
+            const nome = localStorage.getItem('userName');
+            if (!email) { window.location.href = "index.html"; return; }
+
+            document.getElementById('boasVindas').innerText = "Olá, " + (nome || "Família") + "!";
+
+            const lista = JSON.parse(localStorage.getItem('meusGastos')) || [];
+            let totalReceita = 0;
+            let totalGasto = 0;
+
+            lista.forEach(item => {
+                if(item.categoria === "Receita") totalReceita += item.valor;
+                else totalGasto += item.valor;
+            });
+
+            document.getElementById('saldoCard').innerText = "R$ " + (totalReceita - totalGasto).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            document.getElementById('gastoCard').innerText = "R$ " + totalGasto.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+        }
+    </script>
+</body>
+</html>

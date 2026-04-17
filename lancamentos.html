@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Novo Lançamento - FinanceFamily</title>
+</head>
+<body>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="lancamentos.html">Novo Gasto</a>
+        <a href="extrato.html">Extrato</a>
+        <a href="index.html">Sair</a>
+    </nav>
+    <div class="container">
+        <h1>Novo Gasto</h1>
+        <form id="formGasto">
+            <input type="text" id="desc" placeholder="Descrição" required>
+            <input type="number" step="0.01" id="valor" placeholder="Valor (R$)" required>
+            <select id="categoria">
+                <option value="Alimentação">Alimentação</option>
+                <option value="Contas Fixas">Contas Fixas</option>
+                <option value="Lazer">Lazer</option>
+                <option value="Receita">Receita (Entrada)</option>
+            </select>
+            <button type="submit">Guardar Gasto</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('formGasto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const novo = {
+                descricao: document.getElementById('desc').value,
+                valor: parseFloat(document.getElementById('valor').value),
+                categoria: document.getElementById('categoria').value
+            };
+            let lista = JSON.parse(localStorage.getItem('meusGastos')) || [];
+            lista.push(novo);
+            localStorage.setItem('meusGastos', JSON.stringify(lista));
+            window.location.href = "extrato.html";
+        });
+    </script>
+</body>
+</html>

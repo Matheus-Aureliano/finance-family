@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Extrato - FinanceFamily</title>
+</head>
+<body>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="lancamentos.html">Novo Gasto</a>
+        <a href="extrato.html">Extrato</a>
+        <a href="index.html">Sair</a>
+    </nav>
+    <div class="container">
+        <h1>Extrato</h1>
+        <table>
+            <thead><tr><th>Item</th><th>Valor</th></tr></thead>
+            <tbody id="corpoTabela"></tbody>
+        </table>
+        <button onclick="localStorage.removeItem('meusGastos'); location.reload();" style="background:gray; margin-top:10px;">Limpar Tudo</button>
+    </div>
+    <script>
+        const lista = JSON.parse(localStorage.getItem('meusGastos')) || [];
+        const tabela = document.getElementById('corpoTabela');
+        lista.forEach(item => {
+            const cor = item.categoria === "Receita" ? "green" : "red";
+            const sinal = item.categoria === "Receita" ? "+" : "-";
+            tabela.innerHTML += `<tr><td>${item.descricao}</td><td style="color:${cor}">${sinal} R$ ${item.valor.toFixed(2)}</td></tr>`;
+        });
+    </script>
+</body>
+</html>

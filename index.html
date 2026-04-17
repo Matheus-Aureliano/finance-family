@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login - FinanceFamily</title>
+</head>
+<body>
+    <div class="container">
+        <img src="https://cdn-icons-png.flaticon.com/512/2845/2845884.png" style="width: 70px; margin-bottom: 15px;">
+        <h1>Login</h1>
+        <p class="site-subtitle">FinanceFamily</p>
+        <form id="formLogin">
+            <input type="email" id="emailLogin" placeholder="E-mail" required>
+            <input type="password" id="senhaLogin" placeholder="Senha" required>
+            <button type="submit">Entrar no Sistema</button>
+        </form>
+        <p style="margin-top: 15px; font-size: 0.8rem;">Não tem conta? <a href="cadastro.html">Cadastrar</a></p>
+    </div>
+
+    <script>
+        document.getElementById('formLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailLogin').value;
+            const senha = document.getElementById('senhaLogin').value;
+            const emailS = localStorage.getItem('userEmail');
+            const senhaS = localStorage.getItem('userPass');
+
+            if (!emailS) {
+                alert("Conta não existe! Cadastre-se primeiro.");
+                window.location.href = "cadastro.html";
+            } else if (email === emailS && senha === senhaS) {
+                window.location.href = "home.html";
+            } else {
+                alert("E-mail ou senha errados!");
+            }
+        });
+    </script>
+</body>
+</html>
