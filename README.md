@@ -42,4 +42,4 @@ Este projeto utiliza o **LocalStorage** do navegador para salvar as informaçõe
 3. É uma excelente solução para ferramentas de uso pessoal e demonstração de lógica de programação.
 
 ---
-Desenvolvido com ❤️ por [SEU NOME AQUI]
+Desenvolvido com ❤️ por [Matheus Aureliano]
